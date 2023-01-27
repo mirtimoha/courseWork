@@ -161,6 +161,7 @@ public class Main {
         employees[7] = new Employee("Иванов Николай7", 3, 23412);
         employees[8] = new Employee("Иванов Николай8", 4, 22342);
         employees[9] = new Employee("Иванов Николай9", 1, 2342534);
+        EmployeeBook rec1 = new EmployeeBook("Мир мир мир", 2, 125000);
         int sum = getSpending(employees);
         int averageSalary = getAverageSalary(employees);
         /*
@@ -176,6 +177,7 @@ public class Main {
         printEmployeesList(employees, 4);
         findSalaryLessThen(employees, 400000);
         findSalaryMoreThen(employees, 400000);
+
     }
 }
 class Employee {
@@ -215,5 +217,18 @@ class Employee {
     @Override
     public String toString(){
         return("ФИО: " + fullName + ", id: " + id + ", отдел №" + department + ", зарплата: " + salary);
+    }
+}
+class EmployeeBook {
+    private static final Employee[] employees = new Employee [10];
+    public EmployeeBook (String fullName, int department, int salary) {
+        int index = 0;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] == null) {
+                index = i;
+                break;
+            }
+            employees[index] = new Employee(fullName, department, salary);
+        }
     }
 }
