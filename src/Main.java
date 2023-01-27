@@ -151,6 +151,7 @@ public class Main {
         }
     }
     public static void main(String[] args) {
+        /*
         employees[0] = new Employee("Мирхамедов Тимур", 1, 234253423);
         employees[1] = new Employee("Иванов Николай1", 2, 123213);
         employees[2] = new Employee("Иванов Николай2", 3, 333333);
@@ -161,14 +162,11 @@ public class Main {
         employees[7] = new Employee("Иванов Николай7", 3, 23412);
         employees[8] = new Employee("Иванов Николай8", 4, 22342);
         employees[9] = new Employee("Иванов Николай9", 1, 2342534);
-        EmployeeBook rec1 = new EmployeeBook("Мир мир мир", 2, 125000);
         int sum = getSpending(employees);
         int averageSalary = getAverageSalary(employees);
-        /*
         getEmployeesList(employees);
         findMinSalary(employees);
         getFullNames(employees);
-        */
         findMaxSalary(employees);
         indexSalaries(employees, 50);
         findMaxSalary(employees);
@@ -176,7 +174,10 @@ public class Main {
         findMaxSalaryInDepartment(employees, 4);
         printEmployeesList(employees, 4);
         findSalaryLessThen(employees, 400000);
-        findSalaryMoreThen(employees, 400000);
+        findSalaryMoreThen(employees, 400000); */
+        EmployeeBook rec1 = new EmployeeBook();
+        rec1.makeRecord("Ivanov Ivan", 2, 25000);
+        rec1.showRecordsList();
 
     }
 }
@@ -185,7 +186,7 @@ class Employee {
     final private String fullName;
     private int department;
     private int salary;
-    private int id;
+    private final int id;
     public Employee (String fullName, int department, int salary) {
         this.fullName = fullName;
         this.department = department;
@@ -220,15 +221,26 @@ class Employee {
     }
 }
 class EmployeeBook {
-    private static final Employee[] employees = new Employee [10];
-    public EmployeeBook (String fullName, int department, int salary) {
+    private  final Employee[] employees = new Employee[10];
+
+    public EmployeeBook() {
+    }
+
+    public  void makeRecord(String fullName, int department, int salary) {
         int index = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] == null) {
                 index = i;
                 break;
             }
-            employees[index] = new Employee(fullName, department, salary);
+        }
+        employees[index] = new Employee(fullName, department, salary);
+    }
+    public  void showRecordsList() {
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null) {
+                System.out.println(employees[i].getFullName());
+            }
         }
     }
 }
