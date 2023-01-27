@@ -208,7 +208,7 @@ class EmployeeBook {
         }
     }
     // метод, выводящий сотрудника с минимальной зарплатой в определенноом отделе
-    public  void findMinSalaryInDepartment (int department) {
+    public void findMinSalaryInDepartment (int department) {
         int min = 0;
         String empName = "";
         int count = 0;
