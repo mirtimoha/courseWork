@@ -48,16 +48,84 @@ public class Main {
             employee.setSalary(employee.getSalary() + employee.getSalary() / 100 * percent);
         }
     }
+    public static void findMinSalaryInDepartment (Employee[] employees, int department) {
+        int min = 0;
+        String empName = "";
+        int count = 0;
+        for (Employee employee: employees) {
+            if (employee.getDepartment() == department) {
+                min = employee.getSalary();
+                empName = employee.getFullName();
+                break;
+            }
+        }
+        for (Employee employee: employees) {
+            if (employee.getDepartment() == department) {
+                if (employee.getSalary() <= min) {
+                    min = employee.getSalary();
+                    empName = employee.getFullName();
+                    count++;
+                }
+            }
+        }
+        if (count > 0) {
+            System.out.println("Сотрудник с минимальной зарплатой в отделе №" + department + " - " + empName);
+        } else System.out.println("В данном отделе сотрудников нет");
+    }
+    public static void findMaxSalaryInDepartment (Employee[] employees, int department) {
+        int max = 0;
+        String empName = "";
+        int count = 0;
+        for (Employee employee: employees) {
+            if (employee.getDepartment() == department) {
+                max = employee.getSalary();
+                empName = employee.getFullName();
+                break;
+            }
+        }
+        for (Employee employee: employees) {
+            if (employee.getDepartment() == department) {
+                if (employee.getSalary() >= max) {
+                    max = employee.getSalary();
+                    empName = employee.getFullName();
+                    count++;
+                }
+            }
+        }
+        if (count > 0) {
+            System.out.println("Сотрудник с максимальной зарплатой в отделе №" + department + " - " + empName);
+        } else System.out.println("В данном отделе сотрудников нет");
+    }
+    public static int getSpendingInDepartment(Employee[] employees, int department) {
+        int sum = 0;
+        for (Employee employee: employees) {
+            if (employee.getDepartment() == department) {
+                sum = sum + employee.getSalary();
+            }
+        }
+        return sum;
+    }
+    public static int getAverageSalaryInDepartment(Employee[] employees, int department) {
+        int sum = 0;
+        int count = 0;
+        for (Employee employee: employees) {
+            if (employee.getDepartment() == department) {
+                sum = sum + employee.getSalary();
+                count++;
+            }
+        }
+        return sum / count;
+    }
     public static void main(String[] args) {
         employees[0] = new Employee("Мирхамедов Тимур", 1, 234253423);
-        employees[1] = new Employee("Иванов Николай1", 1, 123213);
-        employees[2] = new Employee("Иванов Николай2", 1, 333333);
-        employees[3] = new Employee("Иванов Николай3", 1, 23425);
-        employees[4] = new Employee("Иванов Николай4", 1, 2342534);
-        employees[5] = new Employee("Иванов Николай5", 1, 233453);
-        employees[6] = new Employee("Иванов Николай6", 1, 234552);
-        employees[7] = new Employee("Иванов Николай7", 1, 23412);
-        employees[8] = new Employee("Иванов Николай8", 1, 22342);
+        employees[1] = new Employee("Иванов Николай1", 2, 123213);
+        employees[2] = new Employee("Иванов Николай2", 3, 333333);
+        employees[3] = new Employee("Иванов Николай3", 2, 23425);
+        employees[4] = new Employee("Иванов Николай4", 4, 2342534);
+        employees[5] = new Employee("Иванов Николай5", 4, 233453);
+        employees[6] = new Employee("Иванов Николай6", 5, 234552);
+        employees[7] = new Employee("Иванов Николай7", 3, 23412);
+        employees[8] = new Employee("Иванов Николай8", 4, 22342);
         employees[9] = new Employee("Иванов Николай9", 1, 2342534);
         int sum = getSpending(employees);
         int averageSalary = getAverageSalary(employees);
@@ -69,6 +137,8 @@ public class Main {
         findMaxSalary(employees);
         indexSalaries(employees, 50);
         findMaxSalary(employees);
+        findMinSalaryInDepartment(employees, 4);
+        findMaxSalaryInDepartment(employees, 4);
     }
 }
 class Employee {
