@@ -116,6 +116,40 @@ public class Main {
         }
         return sum / count;
     }
+    public static void indexSalariesInDepartment(Employee[] employees, int department, int percent) {
+        for (Employee employee: employees) {
+            if (employee.getDepartment() == department) {
+                employee.setSalary(employee.getSalary() + employee.getSalary() / 100 * percent);
+            }
+        }
+    }
+    public static void printEmployeesList(Employee[] employees, int department) {
+        for (Employee employee: employees) {
+            if (employee.getDepartment() == department) {
+                System.out.println("ФИО: " + employee.getFullName()
+                        + ", id: " + employee.getId()
+                        + ", зарплата: " + employee.getSalary());
+            }
+        }
+    }
+    public static void findSalaryLessThen(Employee[] employees, int salary) {
+        for (Employee employee: employees) {
+            if (employee.getSalary() < salary) {
+                System.out.println("id: " + employee.getId()
+                + ", ФИО: " + employee.getFullName()
+                + ", зарплата " + employee.getSalary());
+            }
+        }
+    }
+    public static void findSalaryMoreThen(Employee[] employees, int salary) {
+        for (Employee employee: employees) {
+            if (employee.getSalary() >= salary) {
+                System.out.println("id: " + employee.getId()
+                        + ", ФИО: " + employee.getFullName()
+                        + ", зарплата " + employee.getSalary());
+            }
+        }
+    }
     public static void main(String[] args) {
         employees[0] = new Employee("Мирхамедов Тимур", 1, 234253423);
         employees[1] = new Employee("Иванов Николай1", 2, 123213);
@@ -139,6 +173,9 @@ public class Main {
         findMaxSalary(employees);
         findMinSalaryInDepartment(employees, 4);
         findMaxSalaryInDepartment(employees, 4);
+        printEmployeesList(employees, 4);
+        findSalaryLessThen(employees, 400000);
+        findSalaryMoreThen(employees, 400000);
     }
 }
 class Employee {
@@ -177,8 +214,6 @@ class Employee {
     }
     @Override
     public String toString(){
-        return(fullName+ ", "
-                +department+ ", "
-                +salary);
+        return("ФИО: " + fullName + ", id: " + id + ", отдел №" + department + ", зарплата: " + salary);
     }
 }
