@@ -3,8 +3,6 @@
 public class EmployeeBook {
     private final Employee[] employees = new Employee[10]; // создание массив с типом Employee для хранения записей
 
-    public EmployeeBook() {
-    } // объявление конструктора класса
 
     // метод, реализующий создание нового объекта класса Employee с сохранением в массив
     public void makeRecord(String fullName, int department, int salary) {
@@ -49,8 +47,8 @@ public class EmployeeBook {
     }
 
     // метод, возвращающий среднее значение зарплат
-    public int getAverageSalary() {
-        int count = 0;
+    public double getAverageSalary() {
+        double count = 0;
         for (Employee employee : employees) {
             if (employee != null) {
                 count++;
@@ -61,28 +59,26 @@ public class EmployeeBook {
 
     // метод, выводящий сотрудника с минимальной зарплатой
     public void findMinSalary() {
-        int min = employees[0].getSalary();
-        String empName = employees[0].getFullName();
-        for (Employee employee : employees) {
-            if (employee != null && employee.getSalary() < min) {
-                min = employee.getSalary();
-                empName = employee.getFullName();
+        Employee employee = new Employee("", 0, Integer.MAX_VALUE);
+        for (Employee emp : employees) {
+            if (emp != null && emp.getSalary() < employee.getSalary()) {
+                employee = emp;
             }
         }
-        System.out.println("Сотрудник с минимальной зарплатой " + empName + ". Зарплата - " + min);
+        System.out.println("Сотрудник с минимальной зарплатой " + employee.getFullName() +
+                ". Зарплата - " + employee.getSalary());
     }
 
     // метод, выводящий сотрудника с максимальной зарплатой
     public void findMaxSalary() {
-        int max = employees[0].getSalary();
-        String empName = employees[0].getFullName();
-        for (Employee employee : employees) {
-            if (employee != null && employee.getSalary() > max) {
-                max = employee.getSalary();
-                empName = employee.getFullName();
+        Employee employee = new Employee("", 0, 0);
+        for (Employee emp : employees) {
+            if (emp != null && emp.getSalary() > employee.getSalary()) {
+                employee = emp;
             }
         }
-        System.out.println("Сотрудник с максимальной зарплатой " + empName + ". Зарплата - " + max);
+        System.out.println("Сотрудник с максимальной зарплатой " + employee.getFullName() +
+                ". Зарплата - " + employee.getSalary());
     }
 
     // метод, индексирующий зарплату всем сотрудникам на определенный процент
@@ -96,55 +92,34 @@ public class EmployeeBook {
 
     // метод, выводящий сотрудника с минимальной зарплатой в определенноом отделе
     public void findMinSalaryInDepartment(int department) {
-        int min = 0;
-        String empName = "";
+        Employee employee = new Employee("", 0, Integer.MAX_VALUE);
         int count = 0;
-        // сначала ищем первую ненулевую запись с нужным отделом, берем за минимальную
-        for (Employee employee : employees) {
-            if (employee != null && employee.getDepartment() == department) {
-                min = employee.getSalary();
-                empName = employee.getFullName();
-                break;
-            }
-        }
-        //в этом цикле сравниваем записи сотрудником в нужном отделе
-        for (Employee employee : employees) {
-            if (employee != null && employee.getDepartment() == department) {
-                if (employee.getSalary() <= min) {
-                    min = employee.getSalary();
-                    empName = employee.getFullName();
-                    count++;
-                }
+        //в  цикле сравниваем записи сотрудником в нужном отделе
+        for (Employee emp : employees) {
+            if (emp != null && emp.getDepartment() == department && emp.getSalary() <= employee.getSalary()) {
+                employee = emp;
+                count++;
             }
         }
         if (count > 0) {
-            System.out.println("Сотрудник с минимальной зарплатой в отделе №" + department + " - " + empName);
+            System.out.println("Сотрудник с минимальной зарплатой в отделе №" + department + " - " +
+                    employee.getFullName());
         } else System.out.println("В данном отделе сотрудников нет");
     }
 
     // метод, выводящий сотрудника с максимальной зарплатой в определенноом отделе
     public void findMaxSalaryInDepartment(int department) {
-        int max = 0;
-        String empName = "";
+        Employee employee = new Employee("", 0, 0);
         int count = 0;
-        for (Employee employee : employees) {
-            if (employee != null && employee.getDepartment() == department) {
-                max = employee.getSalary();
-                empName = employee.getFullName();
-                break;
-            }
-        }
-        for (Employee employee : employees) {
-            if (employee != null && employee.getDepartment() == department) {
-                if (employee.getSalary() >= max) {
-                    max = employee.getSalary();
-                    empName = employee.getFullName();
-                    count++;
-                }
+        for (Employee emp : employees) {
+            if (emp != null && emp.getDepartment() == department && emp.getSalary() >= employee.getSalary()) {
+                employee = emp;
+                count++;
             }
         }
         if (count > 0) {
-            System.out.println("Сотрудник с максимальной зарплатой в отделе №" + department + " - " + empName);
+            System.out.println("Сотрудник с максимальной зарплатой в отделе №" + department + " - " +
+                    employee.getFullName());
         } else System.out.println("В данном отделе сотрудников нет");
     }
 
@@ -160,9 +135,9 @@ public class EmployeeBook {
     }
 
     // метод, возвращающий среднее значение зарплат по определенному отделу
-    public int getAverageSalaryInDepartment(int department) {
-        int sum = 0;
-        int count = 0;
+    public double getAverageSalaryInDepartment(int department) {
+        double sum = 0;
+        double count = 0;
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartment() == department) {
                 sum = sum + employee.getSalary();
