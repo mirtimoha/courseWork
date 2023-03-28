@@ -146,7 +146,6 @@ public class EmployeeBook {
         }
         return sum / count;
     }
-
     // метод, индексирующий зарплату всем сотрудникам на определенный процент в определенном отделе
     public void indexSalariesInDepartment(int department, int percent) {
         for (Employee employee : employees) {
